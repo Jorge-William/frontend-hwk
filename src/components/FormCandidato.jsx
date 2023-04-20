@@ -19,14 +19,14 @@ const formNames = {
 	endereco: "",
 	bairro: "",
 	cep: "",
+	cnv_status: "false"
 }
 const uuid = uuidv4();
 
 const FormCandidato = () => {
-	const [radioValue, setRadioValue] = useState('false');
+	const [data, setData] = useState([]);
 	const [imagens, setImagens] = useState([])
 	const [numeroDeCursos, setNumeroDeCursos] = useState({ quantidade: 0 });
-	const [data, setData] = useState([]);
 	const [cursosCandidato, setCursosCandidatos] = useState([])
 	const [formData, setFormData] = useState(formNames);
 
@@ -81,8 +81,8 @@ const FormCandidato = () => {
 	}
 
 	const handleChange = (event) => {
-		const name = event.target.name
-		setFormData((formData) => ({ ...formData, [name]: event.target.value }));
+		const { name, value } = event.target
+		setFormData((formData) => ({ ...formData, [name]: value }));
 	};
 
 	return (
@@ -272,10 +272,9 @@ const FormCandidato = () => {
 									className="form-check-input"
 									type="radio"
 									value='false'
-									checked={radioValue === 'false'}
 									name="cnv_status"
 									id="flexRadioDefault1"
-									onChange={handleRadioChange}
+									onChange={handleChange}
 
 								/>
 								<label className="form-check-label" htmlFor="flexRadioDefault1">
@@ -287,10 +286,10 @@ const FormCandidato = () => {
 									className="form-check-input"
 									type="radio"
 									value='true'
-									checked={radioValue === 'true'}
+									// checked={radioValue === 'true'}
 									name="cnv_status"
 									id="flexRadioDefault2"
-									onChange={handleRadioChange}
+									onChange={handleChange}
 								// defaultChecked
 								/>
 								<label className="form-check-label" htmlFor="flexRadioDefault2">
