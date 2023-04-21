@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
-export default function salvarCandidato(formData, cursos, imagens) {
+export default function salvarCandidato(formData, cursos, reset) {
 
     if (
         formData.nome
@@ -33,15 +33,10 @@ export default function salvarCandidato(formData, cursos, imagens) {
                 dadosUpload.append('endereco', formData.endereco)
                 dadosUpload.append('bairro', formData.bairro)
                 dadosUpload.append('cep', formData.cep)
-                for (let i = 0; i < imagens.length; i++) {
-                    dadosUpload.append('files', imagens[i]);
-                }
-                // dadosUpload.append('perfil', imgPerfil),
                 dadosUpload.append('cursos', [cursos])
+                dadosUpload.append('files', formData.perfil)
+                dadosUpload.append('files', formData.frente)
 
-                // console.log(dadosUpload);
-
-                // console.log(formData.get('file'))
                 axios
                     .post('http://localhost:3000/inserir-candidato', dadosUpload, {
                         headers: {
@@ -53,12 +48,13 @@ export default function salvarCandidato(formData, cursos, imagens) {
                     .then((response) => {
                         // console.log(response)
                         if (response.status === 'false') {
-                            throw new Error(response.statusText)
+                            throw new Error(response.error)
                         } else {
                             Swal.fire({
                                 icon: 'success',
                                 title: 'As informações foram salvas com sucesso.'
                             })
+                            reset()
                         }
                     })
                     .catch((error) => {

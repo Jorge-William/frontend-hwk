@@ -1,9 +1,10 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 // import FormData from "form-data";
 import PicklistCursos from './PicklistCursos'
 import salvarCandidato from "../services/salvarCandidato";
+import MaskedInput from "react-text-mask";
 
 const formNames = {
 	nome: "",
@@ -12,20 +13,21 @@ const formNames = {
 	nome_da_mae: "",
 	nome_do_pai: "",
 	cnh_categoria: "",
-	cnv_status: false,
 	telefone: "",
 	peso: "",
 	altura: "",
 	endereco: "",
 	bairro: "",
 	cep: "",
-	cnv_status: "false"
+	cnv_status: "false",
+	frente: null,
+	perfil: null
+
 }
 const uuid = uuidv4();
 
 const FormCandidato = () => {
 	const [data, setData] = useState([]);
-	const [imagens, setImagens] = useState([])
 	const [numeroDeCursos, setNumeroDeCursos] = useState({ quantidade: 0 });
 	const [cursosCandidato, setCursosCandidatos] = useState([])
 	const [formData, setFormData] = useState(formNames);
@@ -46,10 +48,6 @@ const FormCandidato = () => {
 
 		fetchCursos();
 	}, []);
-
-	const handleRadioChange = (event) => {
-		setRadioValue(event.target.value);
-	}
 
 	const picklistCallback = (event) => {
 		const { value } = event.target
@@ -72,12 +70,27 @@ const FormCandidato = () => {
 				quantidade: prevState.quantidade - 1,
 			}));
 		setCursosCandidatos(cursosCandidato.slice(0, -1))
-
-
 	};
 
-	const fileHandler = (event) => {
-		setImagens(event.target.files)
+	const resetState = () => {
+		setFormData(formNames)
+		setCursosCandidatos([])
+		setNumeroDeCursos({ quantidade: 0 })
+	}
+
+	const fileHandlerFrente = (event) => {
+		const { name, files } = event.target
+		setFormData({
+			...formData, [name]: files[0]
+		})
+	}
+
+	const fileHandlerPerfil = (event) => {
+		const { name, files } = event.target
+		setFormData({
+			...formData, [name]: files[0]
+		})
+		console.log(event.target)
 	}
 
 	const handleChange = (event) => {
@@ -98,6 +111,7 @@ const FormCandidato = () => {
 							className="form-control"
 							name="nome"
 							type="text"
+							value={formData.nome}
 							onChange={handleChange}
 						/>
 					</div>
@@ -106,10 +120,13 @@ const FormCandidato = () => {
 							CPF
 						</label>
 						<br />
-						<input
+						<MaskedInput
+							mask={[/[1-9]/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]}
 							className="form-control"
 							name="cpf_num"
 							type="text"
+							value={formData.cpf_num}
+
 							onChange={handleChange}
 						/>
 					</div>
@@ -122,6 +139,8 @@ const FormCandidato = () => {
 							className="form-control"
 							name="cnh_categoria"
 							type="text"
+							value={formData.cnh_categoria.toUpperCase()}
+
 							onChange={handleChange}
 						/>
 					</div>
@@ -130,10 +149,12 @@ const FormCandidato = () => {
 							Nascimento
 						</label>
 						<br />
-						<input
+						<MaskedInput
+							mask={[/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]}
 							className="form-control"
-							type="date"
+							type="text"
 							name="data_nascimento"
+							value={formData.data_nascimento}
 							onChange={handleChange}
 						/>
 					</div>
@@ -151,6 +172,8 @@ const FormCandidato = () => {
 							className="form-control"
 							name="nome_da_mae"
 							type="text"
+							value={formData.nome_da_mae}
+
 							onChange={handleChange}
 						/>
 					</div>
@@ -162,6 +185,8 @@ const FormCandidato = () => {
 						<input
 							className="form-control"
 							name="nome_do_pai"
+							value={formData.nome_do_pai}
+
 							type="text"
 							onChange={handleChange}
 						/>
@@ -180,6 +205,8 @@ const FormCandidato = () => {
 							className="form-control"
 							name="endereco"
 							type="text"
+							value={formData.endereco}
+
 							onChange={handleChange}
 						/>
 					</div>
@@ -192,6 +219,8 @@ const FormCandidato = () => {
 							className="form-control"
 							name="bairro"
 							type="text"
+							value={formData.bairro}
+
 							onChange={handleChange}
 						/>
 					</div>
@@ -204,6 +233,8 @@ const FormCandidato = () => {
 							className="form-control"
 							name="cidade"
 							type="text"
+							value={formData.cidade}
+
 							onChange={handleChange}
 						/>
 					</div>
@@ -218,10 +249,13 @@ const FormCandidato = () => {
 							CEP
 						</label>
 						<br />
-						<input
+						<MaskedInput
+							mask={[/[1-9]/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]}
 							className="form-control"
 							name="cep"
 							type="text"
+							value={formData.cep}
+
 							onChange={handleChange}
 						/>
 					</div>
@@ -230,10 +264,13 @@ const FormCandidato = () => {
 							Telefone
 						</label>
 						<br />
-						<input
+						<MaskedInput
+							mask={['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
 							className="form-control"
 							type="text"
 							name="telefone"
+							value={formData.telefone}
+
 							onChange={handleChange}
 						/>
 					</div>
@@ -242,10 +279,13 @@ const FormCandidato = () => {
 							Peso
 						</label>
 						<br />
-						<input
+						<MaskedInput
+							mask={[/\d/, /\d/, '.', /\d/]}
 							className="form-control"
 							name="peso"
-							type="number"
+							type="text"
+							value={formData.peso}
+
 							onChange={handleChange}
 						/>
 					</div>
@@ -254,10 +294,13 @@ const FormCandidato = () => {
 							Altura
 						</label>
 						<br />
-						<input
+						<MaskedInput
+							mask={[/\d/, ',', /\d/, /\d/]}
 							className="form-control"
-							type="number"
+							type="text"
 							name="altura"
+							value={formData.altura}
+
 							onChange={handleChange}
 						/>
 					</div>
@@ -307,11 +350,17 @@ const FormCandidato = () => {
 				</div>
 				<div className="mb-2 container">
 					<div className="d-flex  flex-row justify-content-center  mt-5">
-						<div className="col-6   text-start p-2">
+						<div className="col-3   text-start p-2">
 							<label htmlFor="foto-frente" className="form-label">
-								Upload das imagens
+								Frente
 							</label>
-							<input type="file" id="foto-frente" multiple className="form-control" onChange={fileHandler} />
+							<input type="file" id="foto-frente" className="form-control" name='frente' onChange={fileHandlerFrente} />
+						</div>
+						<div className="col-3   text-start p-2">
+							<label htmlFor="foto-frente" className="form-label">
+								Perfil
+							</label>
+							<input type="file" id="foto-frente" className="form-control" name='perfil' onChange={fileHandlerPerfil} />
 						</div>
 					</div>
 				</div>
@@ -366,7 +415,7 @@ const FormCandidato = () => {
 				</div>
 
 				<div className="flex-row mt-3 mb-5 d-flex justify-content-center">
-					<button className="btn-principal btn-success m-2" onClick={() => salvarCandidato(formData, cursosCandidato, imagens)}>
+					<button className="btn-principal btn-success m-2" onClick={() => salvarCandidato(formData, cursosCandidato, resetState)}>
 						<i style={{ color: "white" }} className="bi bi-search"></i>
 						Salvar
 					</button>
