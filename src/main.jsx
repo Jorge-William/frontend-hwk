@@ -18,6 +18,7 @@ import ErrorPage from './routes/ErrorPage'
 import CadastrarCurso from './routes/CadastrarCurso'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import FiltroCandidato from './routes/FiltroCandidatos'
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: '/cadastrar-curso',
         element: <CadastrarCurso />,
+      },
+      {
+        path: '/consultar-candidato',
+        element: <FiltroCandidato />,
       },
     ]
   },

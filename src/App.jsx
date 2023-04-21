@@ -97,9 +97,9 @@ const App = () => {
                         <hr className="dropdown-divider" />
                       </li>
                       <li>
-                        <a className="dropdown-item" href="#">
-                          Fazer consulta
-                        </a>
+                        <Link to="/consultar-candidato" className="dropdown-item">
+                          Consultar candidato
+                        </Link>
                       </li>
                     </ul>
                   </li>
