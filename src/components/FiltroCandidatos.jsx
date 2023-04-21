@@ -6,7 +6,8 @@ const FiltroCandidatos = () => {
         bairro: '',
         altura: '',
         categoria_cnh: '',
-        cnv_status: false
+        cnv_status: false,
+        curso: null
     }
 
 
@@ -81,8 +82,8 @@ const FiltroCandidatos = () => {
                             CNV
                         </label>
                         <br />
-                        <select class="form-select" name="cnv_status" aria-label="Default select example" onChange={handleChange}>
-                            <option selected value={false}>Não</option>
+                        <select className="form-select" name="cnv_status" aria-label="Default select example" onChange={handleChange}>
+                            <option defaultValue={false}>Não</option>
                             <option value={true}>Sim</option>
                         </select>
                     </div>
@@ -91,8 +92,8 @@ const FiltroCandidatos = () => {
                             Curso
                         </label>
                         <br />
-                        <select class="form-select" name="cnv_status" aria-label="Default select example" onChange={handleChange}>
-                            <option selected value={false}>Não</option>
+                        <select className="form-select" name="curso" aria-label="Default select example" onChange={handleChange}>
+                            <option defaultValue={false} value={false}>Não</option>
                             <option value={true}>Sim</option>
                         </select>
                     </div>
