@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
-const FiltroCandidatos = () => {
+const FiltroCandidatos = ({ callback }) => {
     const inputNames = {
         nome: '',
         bairro: '',
         altura: '',
         categoria_cnh: '',
-        cnv_status: false,
-        curso: null
+        cnv_status: '',
+        curso: ''
     }
 
 
@@ -20,6 +20,9 @@ const FiltroCandidatos = () => {
 
     }
 
+    useEffect(() => {
+        callback(dadosFiltro)
+    }, [dadosFiltro]);
 
     return (
         <div>
