@@ -6,7 +6,7 @@ import axios from 'axios'
 const FiltroCandidatosPage = () => {
 
     const [candidatos, setCandidatos] = useState(null)
-
+    console.log(candidatos);
     useEffect(() => {
         const fetchCandidatos = async () => {
             try {

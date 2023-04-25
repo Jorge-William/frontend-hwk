@@ -7,7 +7,8 @@ const FiltroCandidatos = ({ callback }) => {
         altura: '',
         categoria_cnh: '',
         cnv_status: '',
-        curso: ''
+        curso: '',
+        tipo: ''
     }
 
 
@@ -80,14 +81,14 @@ const FiltroCandidatos = ({ callback }) => {
                             onChange={handleChange}
                         />
                     </div>
-                    <div className='col-lg-2 col-md-2 mt-3'>
+                    <div className='col-lg-1 col-md-2 mt-3'>
                         <label htmlFor="exampleFormControlInput1" className="form-label">
                             CNV
                         </label>
                         <br />
                         <select className="form-select" name="cnv_status" aria-label="Default select example" onChange={handleChange}>
-                            <option defaultValue={false}>Não</option>
-                            <option value={true}>Sim</option>
+                            <option defaultValue={'false'} value={'false'}>Não</option>
+                            <option value={'true'}>Sim</option>
                         </select>
                     </div>
                     <div className='col-lg-2 col-md-2 mt-3'>
@@ -96,8 +97,19 @@ const FiltroCandidatos = ({ callback }) => {
                         </label>
                         <br />
                         <select className="form-select" name="curso" aria-label="Default select example" onChange={handleChange}>
-                            <option defaultValue={false} value={false}>Não</option>
-                            <option value={true}>Sim</option>
+                            <option defaultValue={'false'} value={'false'}>Não</option>
+                            <option value={'true'}>Sim</option>
+                        </select>
+                    </div>
+                    <div className='col-lg-2 col-md-2 mt-3'>
+                        <label htmlFor="exampleFormControlInput1" className="form-label">
+                            Tipo
+                        </label>
+                        <br />
+                        <select className="form-select" name="tipo" aria-label="Default select example" onChange={handleChange}>
+                            <option defaultValue={'Selecione'} value={''}>Selecione uma opção</option>
+                            <option value={'ostensivo'}>Ostensivo</option>
+                            <option value={'social'}>Social</option>
                         </select>
                     </div>
                 </div>

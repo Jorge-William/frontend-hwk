@@ -33,14 +33,16 @@ const FormCadastroCurso = () => {
             descricao_curso: formData.descricao,
           })
           .then((response) => {
-            if (!response.data) {
-              throw new Error(response.statusText);
+            if (response.data.status === false) {
+              throw new Error(response.data.msg);
             }
             clearState()
             return response.data;
           })
           .catch((error) => {
-            Swal.showValidationMessage(`Request failed: ${error}`);
+            Swal.showValidationMessage(
+              error
+            )
           });
       },
       allowOutsideClick: () => !Swal.isLoading(),

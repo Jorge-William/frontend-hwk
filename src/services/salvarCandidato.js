@@ -8,7 +8,7 @@ export default function salvarCandidato(formData, cursos, reset) {
     ) {
         Swal.fire({
             title: 'Atenção',
-            text: 'Deseja salvar o documento no servidor?',
+            text: 'Deseja salvar as informações do candidato?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -52,7 +52,7 @@ export default function salvarCandidato(formData, cursos, reset) {
                         } else {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'As informações foram salvas com sucesso.'
+                                title: 'Candidato salvo com sucesso.'
                             })
                             reset()
                         }
