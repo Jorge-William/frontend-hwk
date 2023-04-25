@@ -18,7 +18,7 @@ const PicklistCursos = ({ options, numeroDeCursos, callback }) => {
               </option>
               {options.map((curso) => {
                 return (
-                  <option key={curso.id} value={curso.id}>
+                  <option key={curso.id} value={curso.id} >
                     {curso.nome_curso}
                   </option>
                 );

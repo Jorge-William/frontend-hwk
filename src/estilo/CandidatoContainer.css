@@ -1,0 +1,24 @@
+.foto-candidato {
+    /* border: solid 1px #868686; */
+    height: 620px;
+    width: 390px;
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+.container-atributos {
+    background-color: #242834;
+    color: #FFFFFF;
+    font-weight: 100;
+    max-width: 760px;
+    margin-bottom: 40px;
+    margin: 0 auto 30px auto;
+}
+
+h2 {
+    font-weight: 200;
+}
+
+#quantidade-de-itens {
+    font-weight: 100;
+}

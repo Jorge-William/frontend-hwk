@@ -10,7 +10,6 @@ const CadastrarCandidato = () => {
           <h1 className="sub-titulo ">Cadastro de Candidato</h1>
         </div>
       </div>
-
       <FormCandidato />
     </div>
   );

@@ -19,7 +19,9 @@ const formNames = {
 	endereco: "",
 	bairro: "",
 	cep: "",
-	cnv_status: "false",
+	cidade: "",
+	tipo: "",
+	cnv_status: "",
 	frente: null,
 	perfil: null
 
@@ -304,7 +306,7 @@ const FormCandidato = () => {
 							onChange={handleChange}
 						/>
 					</div>
-					<div className="col-2 p-2 ">
+					<div className="col-2 p-2">
 						<label htmlFor="exampleFormControlInput1" className="form-label">
 							CNV
 						</label>
@@ -314,7 +316,7 @@ const FormCandidato = () => {
 								<input
 									className="form-check-input"
 									type="radio"
-									value='false'
+									value='não'
 									name="cnv_status"
 									id="flexRadioDefault1"
 									onChange={handleChange}
@@ -328,7 +330,7 @@ const FormCandidato = () => {
 								<input
 									className="form-check-input"
 									type="radio"
-									value='true'
+									value='sim'
 									// checked={radioValue === 'true'}
 									name="cnv_status"
 									id="flexRadioDefault2"
@@ -342,6 +344,27 @@ const FormCandidato = () => {
 						</div>
 					</div>
 				</div>
+				<div className="container">
+					<div className="d-flex gx-5 flex-row justify-content-center text-start">
+						<div className="col-8 col-xs-12">
+							<div className='col-lg-3 col-md-2 mt-3'>
+								<label htmlFor="exampleFormControlInput1" className="form-label">
+									Tipo
+								</label>
+								<br />
+								<select className="form-select" name="tipo" aria-label="Default select example" onChange={handleChange}>
+									<option defaultValue={''} value={''}>Selecione um valor</option>
+									<option value={'ostensivo'}>
+										Ostensivo</option>
+									<option value={'social'}>
+										Social</option>
+								</select>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
 
 				{/* ------------------------------------ Quarta Linha --------------------- */}
 
